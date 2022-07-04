@@ -17,7 +17,7 @@ def wants_to_play_again():
         dealer.cards = []
         player.has_bj = False
         dealer.has_bj = False
-        game()
+        return True
     else:
         return False
 
@@ -35,7 +35,10 @@ def game():
             dealer.bj_checker()
             if not dealer.has_bj:
                 print("Player has BlackJack and wins!")
-                if wants_to_play_again() is False:
+                wants_to_play = wants_to_play_again()
+                if wants_to_play:
+                    game()
+                else:
                     break
                 break
             else:
@@ -49,7 +52,10 @@ def game():
                     if player.current_score() > 21:
                         print("Player loses - went over 21")
                         game_is_over = True
-                        if wants_to_play_again() is False:
+                        wants_to_play = wants_to_play_again()
+                        if wants_to_play:
+                            game()
+                        else:
                             break
                         break
                     elif player.current_score() == 21:
@@ -68,7 +74,10 @@ def game():
                 dealer.bj_checker()
                 if dealer.has_bj:
                     print("Dealer has BlackJack!")
-                    if wants_to_play_again() is False:
+                    wants_to_play = wants_to_play_again()
+                    if wants_to_play:
+                        game()
+                    else:
                         break
                     break
                 if dealer.current_score() < 17:
@@ -79,7 +88,10 @@ def game():
                         print_score()
                         print("Dealer loses - went over 21")
                         game_is_over = True
-                        if wants_to_play_again() is False:
+                        wants_to_play = wants_to_play_again()
+                        if wants_to_play:
+                            game()
+                        else:
                             break
                         break
                     if dealer.current_score() == 21:
@@ -98,7 +110,10 @@ def game():
                     print("Dealer wins!")
                 elif dealer.current_score() == player.current_score():
                     print("Push!")
-        if wants_to_play_again() is False:
+        wants_to_play = wants_to_play_again()
+        if wants_to_play:
+            game()
+        else:
             break
 
 
